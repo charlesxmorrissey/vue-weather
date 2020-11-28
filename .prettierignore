@@ -1,0 +1,4 @@
+dist
+package.json
+.vscode
+.jest_coverage
