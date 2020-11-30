@@ -1,6 +1,6 @@
 import { createApp } from 'vue'
-import App from './App.vue'
+import App from '@/App.vue'
 
-console.log('process.env::', process.env)
+import '@/assets/styles/index.css'
 
 createApp(App).mount('#app')

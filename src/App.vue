@@ -1,33 +1,47 @@
 <template>
-  <Weather msg="Welcome to Your Vue.js App" />
+  <Weather v-if="results" :results="results" />
+  <Loader v-else />
 </template>
 
 <script>
-import Weather from './components/Weather'
+import Loader from '@/components/Loader'
+import Weather from '@/components/Weather'
+import DarkSkyApi from '@/helpers/DarkSkyApi'
+
+DarkSkyApi.apiKey = process.env.VUE_APP_DARK_SKY_SECRET_KEY
 
 export default {
   name: 'App',
   components: {
+    Loader,
     Weather,
+  },
+
+  data() {
+    return {
+      results: null,
+    }
+  },
+
+  created() {
+    this.fetchWeather().then((data) => {
+      this.results = data
+    })
+  },
+
+  methods: {
+    fetchWeather: () => {
+      return DarkSkyApi.loadCurrent()
+    },
   },
 }
 </script>
 
 <style>
-@import-normalize;
-
-html,
-body {
-  background: lime;
-  height: 100%;
-  margin: 0;
-}
-
 #app {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  align-items: center;
+  display: flex;
+  justify-content: center;
   text-align: center;
 }
 </style>

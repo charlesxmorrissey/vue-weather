@@ -56,6 +56,7 @@ class DarkSkyApi {
    */
   language(value) {
     if (config.acceptedLanguage.indexOf(value) === -1) {
+      // eslint-disable-next-line no-console
       console.warn(`${value} ${config.warningMessage.invalidLanguage}`)
     } else {
       value = value ? (this._language = value) : null
